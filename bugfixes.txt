@@ -1,0 +1,10 @@
+-=[ Änderungen Logfile ]=-
+  + #20230919 OpenXE dev Umgebung von master 1.10 angelegt
+  
+-=[ NEU ]=-
+
+-=[ Optimierungen ]=-
+
+-=[ Bugfixes ]=-
+
+-=[ Security fixes ]=-
