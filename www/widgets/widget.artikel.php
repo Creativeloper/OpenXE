@@ -462,6 +462,7 @@ class WidgetArtikel extends WidgetGenArtikel
       }
     }
     if($action === 'edit' && $nummer != '' && ($nummer !== $nummer_db)) {
+      $nummer_escaped =mysqli_real_escape_string($this->app->DB->connection,$nummer_db ); #20230928 fix SQL error - escape Nummer
 
       $doppelteNummern = $this->app->DB->SelectArr(
         sprintf(
@@ -472,7 +473,7 @@ class WidgetArtikel extends WidgetGenArtikel
         GROUP BY art.nummer,if(ifnull(pr.eigenernummernkreis,0) = 0,0,pr.id) 
         HAVING (COUNT(art.nummer) > 0) 
         LIMIT 101",
-          $nummer_db, $nummer
+          $$nummer_escaped, $nummer
         )
       );
       if(!empty($doppelteNummern)) {
@@ -498,7 +499,8 @@ class WidgetArtikel extends WidgetGenArtikel
     }
 
     //$already_set=0;
-    $anzahl_nummer = $this->app->DB->Select("SELECT count(id) FROM artikel WHERE firma='".$this->app->User->GetFirma()."' AND nummer='$nummer_db' AND geloescht!=1");
+    $nummer_escaped =mysqli_real_escape_string($this->app->DB->connection,$nummer_db ); #20230928 fix SQL error - escape Nummer
+    $anzahl_nummer = $this->app->DB->Select("SELECT count(id) FROM artikel WHERE firma='".$this->app->User->GetFirma()."' AND nummer='$nummer_escaped' AND geloescht!=1"); #20230928 fix SQL error - escape Nummer
     if(($anzahl_nummer > 1 || $fremde_anzahl_nummer > 0) && $neuenummervergeben==1) {
       $this->app->erp->ClearSqlCache('artikel');
     }
