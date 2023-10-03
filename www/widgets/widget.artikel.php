@@ -472,8 +472,8 @@ class WidgetArtikel extends WidgetGenArtikel
         WHERE art.geloescht <> '1' AND art.nummer <> '' AND art.nummer <> 'DEL' AND nummer in ('%s','%s')
         GROUP BY art.nummer,if(ifnull(pr.eigenernummernkreis,0) = 0,0,pr.id) 
         HAVING (COUNT(art.nummer) > 0) 
-        LIMIT 101",
-          $$nummer_escaped, $nummer
+        LIMIT 101", 
+          $nummer_escaped, $nummer (File) //20231003  -$$nummer_escaped
         )
       );
       if(!empty($doppelteNummern)) {
