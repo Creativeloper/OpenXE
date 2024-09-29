@@ -1,7 +1,7 @@
 <?php 
 
 $version="OSS"; 
-$version_revision="1.12";
+$version_revision="1.12 <b>[Creativeloper Edition V 1.0]";
 $gitinfo = file_get_contents("../gitinfo.json");
 if (!empty($gitinfo)) {
   $gitinfo = json_decode($gitinfo);
